@@ -83,6 +83,7 @@
       const blur = document.querySelector("#blur");
 
       const image = document.querySelector("img");
+      const text = document.querySelector(".hl");
 
       spacing.addEventListener("input", function() {
         const spacingValue = this.value;
@@ -97,6 +98,7 @@
       base.addEventListener("input", function() {
         const baseValue = this.value;
         image.style.setProperty("--base", `${baseValue}`);
+        text.style.setProperty("--base", `${baseValue}`);
       });
     </script>
   </body>
