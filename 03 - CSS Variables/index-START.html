@@ -78,28 +78,20 @@
     </style>
 
     <script>
-      const spacing = document.querySelector("#spacing");
-      const base = document.querySelector("#base");
-      const blur = document.querySelector("#blur");
+      const inputs = document.querySelectorAll(".controls input");
 
       const image = document.querySelector("img");
       const text = document.querySelector(".hl");
 
-      spacing.addEventListener("input", function() {
-        const spacingValue = this.value;
-        image.style.setProperty("--spacing", `${spacingValue}px`);
-      });
+      function handleUpdate() {
+        const suffix = this.dataset.sizing || "";
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + suffix
+        );
+      }
 
-      blur.addEventListener("input", function() {
-        const blurValue = this.value;
-        image.style.setProperty("--blur", `${blurValue}px`);
-      });
-
-      base.addEventListener("input", function() {
-        const baseValue = this.value;
-        image.style.setProperty("--base", `${baseValue}`);
-        text.style.setProperty("--base", `${baseValue}`);
-      });
+      inputs.forEach(input => input.addEventListener("input", handleUpdate));
     </script>
   </body>
 </html>
