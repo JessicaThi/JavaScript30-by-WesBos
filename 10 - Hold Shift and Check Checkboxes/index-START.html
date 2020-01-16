@@ -99,31 +99,58 @@
       let multi = false;
       let firstCheck = "";
 
-      checkboxes.forEach((checkbox, index) => {
-        checkbox.addEventListener("change", e => {
-          if (multi) {
-            if (index > firstCheck) {
-              const checkAll = index - firstCheck;
-              console.log(checkAll + " checkAll");
-              console.log(firstCheck + " firstCheck");
-              console.log(index + " index");
-              for (var i = firstCheck; i <= checkAll; i++) {
-                checkboxes[i].checked = true;
-              }
-            } else {
-              const checkAll = firstCheck - index;
-              for (var i = firstCheck; i >= checkAll; i--) {
-                checkboxes[i].checked = true;
-              }
-            }
-          }
+      let lastChecked;
 
-          if (checkbox.checked == true) {
-            multi = true;
-            firstCheck = index;
-          }
-        });
-      });
+      function handleCheck(e) {
+        console.log(e);
+
+        let inBetween = false;
+        if (e.shiftKey && this.checked) {
+          checkboxes.forEach(checkbox => {
+            console.log(checkbox);
+            if (checkbox === this || checkbox === lastChecked) {
+              inBetween = !inBetween;
+              console.log("start");
+            }
+
+            if (inBetween) {
+              checkbox.checked = true;
+            }
+          });
+        }
+
+        lastChecked = this;
+      }
+
+      checkboxes.forEach(checkbox =>
+        checkbox.addEventListener("click", handleCheck)
+      );
+
+      // checkboxes.forEach((checkbox, index) => {
+      //   checkbox.addEventListener("change", e => {
+      //     if (multi) {
+      //       if (index > firstCheck) {
+      //         const checkAll = index - firstCheck;
+      //         console.log(checkAll + " checkAll");
+      //         console.log(firstCheck + " firstCheck");
+      //         console.log(index + " index");
+      //         for (var i = firstCheck; i <= checkAll; i++) {
+      //           checkboxes[i].checked = true;
+      //         }
+      //       } else {
+      //         const checkAll = firstCheck - index;
+      //         for (var i = firstCheck; i >= checkAll; i--) {
+      //           checkboxes[i].checked = true;
+      //         }
+      //       }
+      //     }
+
+      //     if (checkbox.checked == true) {
+      //       multi = true;
+      //       firstCheck = index;
+      //     }
+      //   });
+      // });
     </script>
   </body>
 </html>
