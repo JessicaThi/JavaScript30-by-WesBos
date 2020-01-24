@@ -96,14 +96,9 @@
 
     <script>
       const checkboxes = document.querySelectorAll("input");
-      let multi = false;
-      let firstCheck = "";
-
       let lastChecked;
 
       function handleCheck(e) {
-        console.log(e);
-
         let inBetween = false;
         if (e.shiftKey && this.checked) {
           checkboxes.forEach(checkbox => {
